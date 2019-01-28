@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="styling.css">
+<style type="text/css">
+html,body {
+    padding:0;
+    margin:0;
+    height:100%;
+}
+body {
+    height:1000px;
+     width:1400px;
+}
+
+.top, .bot {
+    height: 50%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.left, .right {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    margin-right: -4px;
+   // border: 1px solid red;
+  
+    box-sizing: border-box;
+}
+</style>
+<script>
+ var year;
+    var sem;
+	function addFields() {
+		year = parseInt(document.Year_Sem_Form.year.value);
+		sem = parseInt(document.Year_Sem_Form.sem.value);
+		if (Number.isNaN(year) || Number.isNaN(sem) || year > 4 || year < 0
+				|| sem<0||sem>2) {
+			alert("Enter Valid year and semester");
+			document.forms["Year_Sem_Form"]["year"].value = "";
+			document.forms["Year_Sem_Form"]["sem"].value = "";
+		}
+		else {
+			var content = "<table cellspacing='5'><thead><th>Year</th><th>Semester</th><th>Academic Year</th><th>SGPA</th></thead>";
+			document.forms["academic_form"].removeAttribute("hidden");
+			var total_sems = (year - 1) * 2 + sem;
+			var count = 0;
+			for (var i = 0; i < year; i++) {
+				for (var j = 0; j < 2; j++) {
+					if (count == total_sems - 1)
+						break;
+					count++;
+					content += "<tr align='center'><td>"
+							+ (i + 1)
+							+ "</td><td>"
+							+ (j + 1)
+							+ "</td><td><input type='text' placeholder='eg 2017-2018' id='year"+(count)+"' pattern='[0-9]{4}-[0-9]{4}' required></td><td><input type='number' min=0 max=10 step=0.01 id='gpa"+(count)+" required'/></td></tr>";
+					
+				}
+			}
+			content += "</table><input type='submit' onclick='alert(\"hell\")' id='sub'>";
+			document.getElementById("table_content").innerHTML = content;
+		    
+		}	
+	}
+ 
+</script>
+</head>
+<body>
+<div>
+   <div class="heading">
+       <center><h1>COLLEGE</h1> </center>
+   </div>
+   <div class="menu">
+       <a href="main.html">About</a>
+       <a href="student.html" target="_blank">Student Information</a>
+       <a class="active" href="#0.2_">Academic Information</a>
+       <a href="proctor.html">Proctor Information</a>
+       <a href="attendance.html">Attendance Information</a>
+       <a href="main.html" target="_blank">Total Information</a>
+   </div>
+</div>
+<div class="top">
+   <div class="left">
+   
+		<form name="prev_aca_det" autocomplete="on" >
+			<fieldset>
+				<legend><center>Previous Education Deatils</center></legend>
+				<h3>Tenth Class:</h3>
+				<table cellspacing="15" cellpadding="5">
+					<tr>
+						<td>Type:</td>
+						<td><input list="ssc_types" name="ssc_types"> <datalist
+								id="ssc_types">
+								<option value="SSC" />
+								<option value="CBSE" />
+								<option value="ICSE" />
+							</datalist></td>
+					</tr>
+					<tr>
+						<td>CGPA:</td>
+						<td><input type="number" min=0 max=10 step=0.01 id="t_gpa" /></td>
+					</tr>
+					
+					<tr>
+						<td>Month and Year of Passed:</td>
+						<td><input type="date" id="t_mon"></td>
+					</tr>
+				</table>
+				<h3>Intermediate:</h3>
+				<table cellspacing="15" cellpadding="5">
+					<tr>
+						<td>Type:</td>
+						<td><input list="int_types" name="int_types"> <datalist
+								id="int_types">
+								<option value="IPE" />
+								<option value="CBSE" />
+							</datalist></td>
+					</tr>
+					<tr>
+						<td>CGPA:</td>
+						<td><input type="number" min=0 max=10 step=0.01 id="int_gpa" /></td>
+					</tr>
+					
+					<tr>
+						<td>Month and Year of Passed:</td>
+						<td><input type="date" id="int_mon"></td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+   </div>
+   <div class="right" >
+   <form method="post" autocomplete="on" name="Year_Sem_Form">
+			<fieldset>
+				<legend>
+					<center><b>Under Graduation Academic Information</b></center>
+				</legend>
+				<table cellspacing="20">
+					<tr>
+						<td>Current Year:</td>
+						<td><input type="number" id="year" placeholder="1-4" max="10" 
+							required></td>
+							</tr><tr>
+						<td>Current Semester:</td>
+						<td><input type="number" id="sem" placeholder="1-2" max="10" 
+							required></td>
+							</tr><tr>
+						<td><button type="button" id="Submit" onclick="addFields()">Submit</button>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+   </div>
+</div>
+
+<!-- BOT 50% -->
+<div class="bot">
+ 
+		<form name="academic_form" hidden="true">
+			<fieldset>
+				<legend>Enter Details</legend>
+				<div id="table_content"></div>
+
+			</fieldset>
+		</form>
+</div>
+</body>
+</html>

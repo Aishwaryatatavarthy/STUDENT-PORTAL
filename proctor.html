@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="styling.css">
+<script>
+function formValidations() {
+	var x1 = document.forms["proctor_form"]["p_first_name_input"].value;
+	var x2 = document.forms["proctor_form"]["p_last_name_input"].value;
+	
+	if (x1 == "" || x2 == "" ) {
+		alert("Please Fill all the Mandatory Fields");
+
+	}
+}
+function emailValidations(p_email_input) {
+	var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
+	if (!reg.test(email_input.value)) {
+		alert("You have entered an invalid email address!");
+		email_input.value = "";
+		return false;
+	}
+
+	else {
+		return true;
+	}
+}
+function phoneValidations(p_phone_input) {
+	var reg = /^[6-9]{1}[0-9]{9}$/
+	if (reg.test(phone_input.value)) {
+		return true;
+	} else {
+		alert("Enter valid mobile number!!");
+		phone_input.value = "";
+		return false;
+	}
+}
+function passwordValidations(p_password_input) { 
+	//8 to 20 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character
+	if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password_input.value)) {
+		return true;
+	} else {
+		alert("Invalid password!");
+		return false;
+	}
+}
+</script>
+</head>
+<body>
+<div>
+<div class="heading">
+ <center><h1>COLLEGE</h1> </center>
+</div>
+<div class="menu">
+<a href="main.html">About</a>
+<a href="student.html" target="_blank">Student Information</a>
+<a href="academic.html">Academic Information</a>
+<a class="active" href="#0.3_">Proctor Information</a>
+<a href="attendance.html">Attendance Information</a>
+<a href="main.html" target="_blank">Total Information</a>
+</div>
+<center>
+
+		<form action="result.html" method="post" name="proctor_form"  onsubmit="return formValidations()"  autocomplete="on">
+			<fieldset>
+				<legend>Student Information Form</legend>
+				<table cellspacing="20">
+					<tr>
+						<td label>First Name:</td>
+						<td><input type="text" name="p_first_name_input"></td>
+					</tr>
+					<tr>
+						<td label>Last Name:</td>
+						<td><input type="text" name="p_last_name_input"></td>
+					</tr>
+					<tr>
+						<td label>Id:</td>
+						<td><input type="text" name="p_id_input"></td>
+					</tr>
+					<tr>
+						<td label>Password:</td>
+						<td><input type="password" name="p_password_input" onchange="passwordValidations(this)"></td>
+					</tr>
+					<tr>
+						<td label>Department:</td>
+						<td><select name="p_department" multiple>
+								<optgroup label="Department">
+								 <option value="CIVIL"> CIVIL </option>
+									<option value="CSE"> CSE </option>
+									<option value="ECE"> ECE </option>
+									<option value="EEE"> EEE </option>
+									<option value="IT"> IT </option>
+									<option value="MECH"> MECH </option>
+								</optgroup>
+						</select></td>
+					</tr>
+					
+					<tr>
+						<td label>Designation:</td>
+						<td><select name="p_designation" multiple>
+								<optgroup label="Designation">
+								<option value="HOD">HOD</option>
+								 <option value="PROFESSOR">PROFESSOR</option>
+									<option value="ASSISTANTPROFESSOR">ASSISTANT PROFESSOR</option>
+								
+								</optgroup>
+						</select></td>
+					</tr>
+					<tr>
+						<td label>Qualification:</td>
+						<td><input type="text" name="p_qualification_input"></td>
+					</tr>
+					
+					<tr>
+						<td label>Date of Birth:</td>
+						<td><input type="dob" name="p_dob_input"></td>
+					</tr>
+					
+					<tr>
+						<td label>Email:</td>
+						<td><input type="text" name="p_email_input" onchange="emailValidations(this)"></td>
+					</tr>
+					<tr>
+						<td label>Gender:</td>
+						<td><input type="radio" name="p_gender_input" value="male">Male
+						<input type="radio" name="p_gender_input" value="female">Female
+						<input type="radio" name="p_gender_input" value="other">Other</td>
+					</tr>
+					
+					
+					<tr>
+						<td label>Address:</td>
+						<td><textarea name="p_address"> 
+						</textarea></td>
+					</tr>
+					<tr>
+						<td label>Phone no:</td>
+						<td><input type="telephone" name="p_phone_input" onchange="phoneValidations(this)"></td>
+					</tr>
+					<tr>
+						<td><input type="reset" value="Reset"></td>
+						<td><input type="submit" value="Submit"></td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+
+	</center>
+
+</div>
+
+</body>
+</html>
